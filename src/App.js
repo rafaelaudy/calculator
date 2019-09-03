@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 import ButtonNumber from "./ButtonNumber";
 import { numberClick } from "./ActionCreators";
+import appReducer from "./appReducer";
 
 function App() {
-  const [result] = useState("0");
+  const [state, setState] = useState({ result: "0" });
+
+  const reduceAndUpdateState = (actionCreator, payload) => {
+    const newState = appReducer(state, actionCreator(payload));
+    setState(newState);
+  };
 
   const buttonNumbers = [...Array(10).keys()].map(number => (
     <ButtonNumber
       key={`button-number-${number}`}
       number={number}
-      clickHandler={() => numberClick(number)}
+      clickHandler={() => reduceAndUpdateState(numberClick, number)}
     />
   ));
 
   return (
     <div>
-      <label>{result}</label>
+      <label>{state.result}</label>
       {buttonNumbers}
     </div>
   );
