@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import App from "./App";
 
 it("App is correctly loaded", () => {
@@ -9,7 +9,7 @@ it("App is correctly loaded", () => {
 
 describe("integration tests", () => {
   it("App, ButtonNumbers and Reducers are correctly connected", () => {
-    const app = mount(<App />);
+    const app = shallow(<App />);
     expect(app.find("label").text()).toBe("0");
     app
       .find("button")

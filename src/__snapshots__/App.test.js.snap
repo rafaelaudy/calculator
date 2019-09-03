@@ -5,55 +5,85 @@ exports[`App is correctly loaded 1`] = `
   <label>
     0
   </label>
-  <ButtonNumber
-    clickHandler={[Function]}
+  <button
     key="button-number-0"
-    number={0}
-  />
-  <ButtonNumber
-    clickHandler={[Function]}
+    onClick={[Function]}
+  >
+    0
+  </button>
+  <button
     key="button-number-1"
-    number={1}
-  />
-  <ButtonNumber
-    clickHandler={[Function]}
+    onClick={[Function]}
+  >
+    1
+  </button>
+  <button
     key="button-number-2"
-    number={2}
-  />
-  <ButtonNumber
-    clickHandler={[Function]}
+    onClick={[Function]}
+  >
+    2
+  </button>
+  <button
     key="button-number-3"
-    number={3}
-  />
-  <ButtonNumber
-    clickHandler={[Function]}
+    onClick={[Function]}
+  >
+    3
+  </button>
+  <button
     key="button-number-4"
-    number={4}
-  />
-  <ButtonNumber
-    clickHandler={[Function]}
+    onClick={[Function]}
+  >
+    4
+  </button>
+  <button
     key="button-number-5"
-    number={5}
-  />
-  <ButtonNumber
-    clickHandler={[Function]}
+    onClick={[Function]}
+  >
+    5
+  </button>
+  <button
     key="button-number-6"
-    number={6}
-  />
-  <ButtonNumber
-    clickHandler={[Function]}
+    onClick={[Function]}
+  >
+    6
+  </button>
+  <button
     key="button-number-7"
-    number={7}
-  />
-  <ButtonNumber
-    clickHandler={[Function]}
+    onClick={[Function]}
+  >
+    7
+  </button>
+  <button
     key="button-number-8"
-    number={8}
-  />
-  <ButtonNumber
-    clickHandler={[Function]}
+    onClick={[Function]}
+  >
+    8
+  </button>
+  <button
     key="button-number-9"
-    number={9}
-  />
+    onClick={[Function]}
+  >
+    9
+  </button>
+  <button
+    onClick={[Function]}
+  >
+    +
+  </button>
+  <button
+    onClick={[Function]}
+  >
+    -
+  </button>
+  <button
+    onClick={[Function]}
+  >
+    /
+  </button>
+  <button
+    onClick={[Function]}
+  >
+    *
+  </button>
 </div>
 `;

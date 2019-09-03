@@ -1,11 +1,24 @@
-import { NUMBER_CLICK_TYPE } from "./ActionCreators";
+import { NUMBER_CLICK_TYPE, SUM_CLICK_TYPE } from "./ActionCreators";
 
-const appReducer = (state = { result: "0" }, { type, payload }) => {
+const appReducer = (
+  state = { value: "0", temporaryValue: undefined },
+  { type, payload }
+) => {
   switch (type) {
     case NUMBER_CLICK_TYPE: {
-      const result =
-        state.result === "0" ? payload.value : state.result + payload.value;
-      return { ...state, result };
+      const value =
+        state.value === "0" ? payload.value : state.value + payload.value;
+      return { ...state, value };
+    }
+
+    case SUM_CLICK_TYPE: {
+      return {
+        ...state,
+        temporaryValue: state.temporaryValue
+          ? Number(state.temporaryValue) + Number(state.value) + ""
+          : state.value,
+        value: "0"
+      };
     }
 
     default: {
