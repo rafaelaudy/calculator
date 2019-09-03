@@ -2,35 +2,58 @@
 
 exports[`App is correctly loaded 1`] = `
 <div>
+  <label>
+    0
+  </label>
   <ButtonNumber
+    clickHandler={[Function]}
+    key="button-number-0"
+    number={0}
+  />
+  <ButtonNumber
+    clickHandler={[Function]}
+    key="button-number-1"
     number={1}
   />
   <ButtonNumber
+    clickHandler={[Function]}
+    key="button-number-2"
     number={2}
   />
   <ButtonNumber
+    clickHandler={[Function]}
+    key="button-number-3"
     number={3}
   />
   <ButtonNumber
+    clickHandler={[Function]}
+    key="button-number-4"
     number={4}
   />
   <ButtonNumber
+    clickHandler={[Function]}
+    key="button-number-5"
     number={5}
   />
   <ButtonNumber
+    clickHandler={[Function]}
+    key="button-number-6"
     number={6}
   />
   <ButtonNumber
+    clickHandler={[Function]}
+    key="button-number-7"
     number={7}
   />
   <ButtonNumber
+    clickHandler={[Function]}
+    key="button-number-8"
     number={8}
   />
   <ButtonNumber
+    clickHandler={[Function]}
+    key="button-number-9"
     number={9}
-  />
-  <ButtonNumber
-    number={0}
   />
 </div>
 `;

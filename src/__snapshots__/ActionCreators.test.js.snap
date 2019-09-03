@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`numberClick action creator exports the correct format 1`] = `
+Object {
+  "payload": Object {
+    "value": 1,
+  },
+  "type": "NUMBER_CLICK",
+}
+`;
