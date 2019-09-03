@@ -1,24 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import ButtonNumber from "./ButtonNumber";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ButtonNumber number={1}></ButtonNumber>
+      <ButtonNumber number={2}></ButtonNumber>
+      <ButtonNumber number={3}></ButtonNumber>
+      <ButtonNumber number={4}></ButtonNumber>
+      <ButtonNumber number={5}></ButtonNumber>
+      <ButtonNumber number={6}></ButtonNumber>
+      <ButtonNumber number={7}></ButtonNumber>
+      <ButtonNumber number={8}></ButtonNumber>
+      <ButtonNumber number={9}></ButtonNumber>
+      <ButtonNumber number={0}></ButtonNumber>
     </div>
   );
 }
