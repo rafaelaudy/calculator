@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`calculateClick action creator exports the correct format 1`] = `
+Object {
+  "type": "CALCULATE_CLICK",
+}
+`;
+
 exports[`divisionClick action creator exports the correct format 1`] = `
 Object {
   "type": "DIVISION_CLICK",
