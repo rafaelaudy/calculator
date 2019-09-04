@@ -30,7 +30,7 @@ it("App is correctly loaded", () => {
 
 it("Numbers buttons are working correctly", () => {
   const app = shallow(<App />);
-  const buttons = app.find("button");
+  const buttons = app.find(".app__number-container button");
   const state = {};
 
   [...Array(10).keys()].map(index => {
@@ -44,25 +44,25 @@ it("Numbers buttons are working correctly", () => {
 
 it("Operation buttons are working correctly", () => {
   const app = shallow(<App />);
-  const buttons = app.find("button");
+  const buttons = app.find(".app__operation-container button");
   const state = {};
 
-  buttons.at(10).simulate("click");
+  buttons.at(0).simulate("click");
   expect(appReducer).toHaveBeenLastCalledWith(state, sumClick());
 
-  buttons.at(11).simulate("click");
+  buttons.at(1).simulate("click");
   expect(appReducer).toHaveBeenLastCalledWith(state, subtractionClick());
 
-  buttons.at(12).simulate("click");
+  buttons.at(2).simulate("click");
   expect(appReducer).toHaveBeenLastCalledWith(state, divisionClick());
 
-  buttons.at(13).simulate("click");
+  buttons.at(3).simulate("click");
   expect(appReducer).toHaveBeenLastCalledWith(state, multiplicationClick());
 
-  buttons.at(14).simulate("click");
+  buttons.at(4).simulate("click");
   expect(appReducer).toHaveBeenLastCalledWith(state, calculateClick());
 
-  buttons.at(15).simulate("click");
+  app.find(".app__result-container button").simulate("click");
   expect(appReducer).toHaveBeenLastCalledWith(state, resetClick());
 
   expect(appReducer).toHaveBeenCalledTimes(6);
