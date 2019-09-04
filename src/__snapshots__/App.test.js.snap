@@ -85,5 +85,10 @@ exports[`App is correctly loaded 1`] = `
   >
     *
   </button>
+  <button
+    onClick={[Function]}
+  >
+    =
+  </button>
 </div>
 `;

@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { numberClick, sumClick } from "./ActionCreators";
+import {
+  numberClick,
+  sumClick,
+  subtractionClick,
+  divisionClick,
+  multiplicationClick,
+  calculateClick
+} from "./ActionCreators";
 import appReducer from "./appReducer";
 
 function App() {
@@ -29,9 +36,12 @@ function App() {
       <label>{value}</label>
       {buttonNumbers}
       <button onClick={() => reduceAndUpdateState(sumClick)}>+</button>
-      <button onClick={() => reduceAndUpdateState(sumClick)}>-</button>
-      <button onClick={() => reduceAndUpdateState(sumClick)}>/</button>
-      <button onClick={() => reduceAndUpdateState(sumClick)}>*</button>
+      <button onClick={() => reduceAndUpdateState(subtractionClick)}>-</button>
+      <button onClick={() => reduceAndUpdateState(divisionClick)}>/</button>
+      <button onClick={() => reduceAndUpdateState(multiplicationClick)}>
+        *
+      </button>
+      <button onClick={() => reduceAndUpdateState(calculateClick)}>=</button>
     </div>
   );
 }
