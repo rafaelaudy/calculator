@@ -4,89 +4,339 @@ exports[`App is correctly loaded 1`] = `
 <div>
   <label />
   <button
+    disabled={false}
     key="button-number-0"
     onClick={[Function]}
   >
     0
   </button>
   <button
+    disabled={false}
     key="button-number-1"
     onClick={[Function]}
   >
     1
   </button>
   <button
+    disabled={false}
     key="button-number-2"
     onClick={[Function]}
   >
     2
   </button>
   <button
+    disabled={false}
     key="button-number-3"
     onClick={[Function]}
   >
     3
   </button>
   <button
+    disabled={false}
     key="button-number-4"
     onClick={[Function]}
   >
     4
   </button>
   <button
+    disabled={false}
     key="button-number-5"
     onClick={[Function]}
   >
     5
   </button>
   <button
+    disabled={false}
     key="button-number-6"
     onClick={[Function]}
   >
     6
   </button>
   <button
+    disabled={false}
     key="button-number-7"
     onClick={[Function]}
   >
     7
   </button>
   <button
+    disabled={false}
     key="button-number-8"
     onClick={[Function]}
   >
     8
   </button>
   <button
+    disabled={false}
     key="button-number-9"
     onClick={[Function]}
   >
     9
   </button>
   <button
+    disabled={false}
     onClick={[Function]}
   >
     +
   </button>
   <button
+    disabled={false}
     onClick={[Function]}
   >
     -
   </button>
   <button
+    disabled={false}
     onClick={[Function]}
   >
     /
   </button>
   <button
+    disabled={false}
     onClick={[Function]}
   >
     *
   </button>
   <button
+    disabled={false}
     onClick={[Function]}
   >
     =
   </button>
+  <button
+    onClick={[Function]}
+  >
+    C
+  </button>
 </div>
+`;
+
+exports[`shows calculated values 1`] = `
+<App>
+  <div>
+    <label>
+      One million
+    </label>
+    <button
+      disabled={false}
+      key="button-number-0"
+      onClick={[Function]}
+    >
+      0
+    </button>
+    <button
+      disabled={false}
+      key="button-number-1"
+      onClick={[Function]}
+    >
+      1
+    </button>
+    <button
+      disabled={false}
+      key="button-number-2"
+      onClick={[Function]}
+    >
+      2
+    </button>
+    <button
+      disabled={false}
+      key="button-number-3"
+      onClick={[Function]}
+    >
+      3
+    </button>
+    <button
+      disabled={false}
+      key="button-number-4"
+      onClick={[Function]}
+    >
+      4
+    </button>
+    <button
+      disabled={false}
+      key="button-number-5"
+      onClick={[Function]}
+    >
+      5
+    </button>
+    <button
+      disabled={false}
+      key="button-number-6"
+      onClick={[Function]}
+    >
+      6
+    </button>
+    <button
+      disabled={false}
+      key="button-number-7"
+      onClick={[Function]}
+    >
+      7
+    </button>
+    <button
+      disabled={false}
+      key="button-number-8"
+      onClick={[Function]}
+    >
+      8
+    </button>
+    <button
+      disabled={false}
+      key="button-number-9"
+      onClick={[Function]}
+    >
+      9
+    </button>
+    <button
+      disabled={false}
+      onClick={[Function]}
+    >
+      +
+    </button>
+    <button
+      disabled={false}
+      onClick={[Function]}
+    >
+      -
+    </button>
+    <button
+      disabled={false}
+      onClick={[Function]}
+    >
+      /
+    </button>
+    <button
+      disabled={false}
+      onClick={[Function]}
+    >
+      *
+    </button>
+    <button
+      disabled={false}
+      onClick={[Function]}
+    >
+      =
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      C
+    </button>
+  </div>
+</App>
+`;
+
+exports[`shows error messages and block inputs 1`] = `
+<App>
+  <div>
+    <label>
+      Random
+    </label>
+    <button
+      disabled={true}
+      key="button-number-0"
+      onClick={[Function]}
+    >
+      0
+    </button>
+    <button
+      disabled={true}
+      key="button-number-1"
+      onClick={[Function]}
+    >
+      1
+    </button>
+    <button
+      disabled={true}
+      key="button-number-2"
+      onClick={[Function]}
+    >
+      2
+    </button>
+    <button
+      disabled={true}
+      key="button-number-3"
+      onClick={[Function]}
+    >
+      3
+    </button>
+    <button
+      disabled={true}
+      key="button-number-4"
+      onClick={[Function]}
+    >
+      4
+    </button>
+    <button
+      disabled={true}
+      key="button-number-5"
+      onClick={[Function]}
+    >
+      5
+    </button>
+    <button
+      disabled={true}
+      key="button-number-6"
+      onClick={[Function]}
+    >
+      6
+    </button>
+    <button
+      disabled={true}
+      key="button-number-7"
+      onClick={[Function]}
+    >
+      7
+    </button>
+    <button
+      disabled={true}
+      key="button-number-8"
+      onClick={[Function]}
+    >
+      8
+    </button>
+    <button
+      disabled={true}
+      key="button-number-9"
+      onClick={[Function]}
+    >
+      9
+    </button>
+    <button
+      disabled={true}
+      onClick={[Function]}
+    >
+      +
+    </button>
+    <button
+      disabled={true}
+      onClick={[Function]}
+    >
+      -
+    </button>
+    <button
+      disabled={true}
+      onClick={[Function]}
+    >
+      /
+    </button>
+    <button
+      disabled={true}
+      onClick={[Function]}
+    >
+      *
+    </button>
+    <button
+      disabled={true}
+      onClick={[Function]}
+    >
+      =
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      C
+    </button>
+  </div>
+</App>
 `;

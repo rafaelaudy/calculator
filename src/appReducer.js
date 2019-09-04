@@ -6,7 +6,8 @@ import {
   SUBTRACTION_CLICK,
   CALCULATE_CLICK,
   MULTIPLICATION_CLICK,
-  DIVISION_CLICK
+  DIVISION_CLICK,
+  RESET_CLICK
 } from "./ActionCreators";
 
 const calculate = ({ memoryOperation, memory, input }) =>
@@ -38,7 +39,7 @@ const defaultState = {
   memoryOperation: undefined
 };
 
-const appReducer = (state = defaultState, { type, payload }) => {
+const appReducer = (state = defaultState, { type, payload } = {}) => {
   switch (type) {
     case NUMBER_CLICK_TYPE: {
       const input =
@@ -78,6 +79,10 @@ const appReducer = (state = defaultState, { type, payload }) => {
 
     case DIVISION_CLICK: {
       return reduceOperation(state, "/");
+    }
+
+    case RESET_CLICK: {
+      return { ...defaultState };
     }
 
     default: {

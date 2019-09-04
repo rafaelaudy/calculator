@@ -27,6 +27,12 @@ Object {
 }
 `;
 
+exports[`resetClick action creator exports the correct format 1`] = `
+Object {
+  "type": "RESET_CLICK",
+}
+`;
+
 exports[`subtractionClick action creator exports the correct format 1`] = `
 Object {
   "type": "SUBTRACTION_CLICK",

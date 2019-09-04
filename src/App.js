@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   numberClick,
   sumClick,
   subtractionClick,
   divisionClick,
   multiplicationClick,
-  calculateClick
+  calculateClick,
+  resetClick
 } from "./ActionCreators";
 import appReducer from "./appReducer";
 
 function App() {
-  const [state, setState] = useState({ input: "" });
+  const [state, setState] = useState({});
+  useEffect(() => {
+    setState(appReducer());
+  }, []);
 
-  const reduceAndUpdateState = (actionCreator, payload) => {
+  const clickHandler = (actionCreator, payload) => {
     const newState = appReducer(state, actionCreator(payload));
     setState(newState);
   };
@@ -20,7 +24,8 @@ function App() {
   const buttonNumbers = [...Array(10).keys()].map(number => (
     <button
       key={`button-number-${number}`}
-      onClick={() => reduceAndUpdateState(numberClick, number)}
+      disabled={!!state.error}
+      onClick={() => clickHandler(numberClick, number)}
     >
       {number}
     </button>
@@ -33,15 +38,39 @@ function App() {
 
   return (
     <div>
-      <label>{input}</label>
+      <label>{state.error || input}</label>
       {buttonNumbers}
-      <button onClick={() => reduceAndUpdateState(sumClick)}>+</button>
-      <button onClick={() => reduceAndUpdateState(subtractionClick)}>-</button>
-      <button onClick={() => reduceAndUpdateState(divisionClick)}>/</button>
-      <button onClick={() => reduceAndUpdateState(multiplicationClick)}>
+
+      <button disabled={!!state.error} onClick={() => clickHandler(sumClick)}>
+        +
+      </button>
+
+      <button
+        disabled={!!state.error}
+        onClick={() => clickHandler(subtractionClick)}
+      >
+        -
+      </button>
+      <button
+        disabled={!!state.error}
+        onClick={() => clickHandler(divisionClick)}
+      >
+        /
+      </button>
+      <button
+        disabled={!!state.error}
+        onClick={() => clickHandler(multiplicationClick)}
+      >
         *
       </button>
-      <button onClick={() => reduceAndUpdateState(calculateClick)}>=</button>
+      <button
+        disabled={!!state.error}
+        onClick={() => clickHandler(calculateClick)}
+      >
+        =
+      </button>
+
+      <button onClick={() => clickHandler(resetClick)}>C</button>
     </div>
   );
 }

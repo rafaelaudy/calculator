@@ -28,3 +28,8 @@ export const CALCULATE_CLICK = "CALCULATE_CLICK";
 export const calculateClick = () => ({
   type: CALCULATE_CLICK
 });
+
+export const RESET_CLICK = "RESET_CLICK";
+export const resetClick = () => ({
+  type: RESET_CLICK
+});

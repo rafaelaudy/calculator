@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import App from "./App";
 import appReducer from "./appReducer";
 import {
@@ -8,13 +8,15 @@ import {
   subtractionClick,
   divisionClick,
   multiplicationClick,
-  calculateClick
+  calculateClick,
+  resetClick
 } from "./ActionCreators";
 
-jest.mock("./appReducer", () => jest.fn().mockReturnValue({ input: "0" }));
+jest.mock("./appReducer", () => jest.fn());
 
 beforeEach(() => {
   jest.clearAllMocks();
+  appReducer.mockReturnValue({});
 });
 
 afterAll(() => {
@@ -29,7 +31,7 @@ it("App is correctly loaded", () => {
 it("Numbers buttons are working correctly", () => {
   const app = shallow(<App />);
   const buttons = app.find("button");
-  const state = { input: "" };
+  const state = {};
 
   [...Array(10).keys()].map(index => {
     buttons.at(index).simulate("click");
@@ -43,7 +45,7 @@ it("Numbers buttons are working correctly", () => {
 it("Operation buttons are working correctly", () => {
   const app = shallow(<App />);
   const buttons = app.find("button");
-  const state = { input: "" };
+  const state = {};
 
   buttons.at(10).simulate("click");
   expect(appReducer).toHaveBeenLastCalledWith(state, sumClick());
@@ -60,5 +62,22 @@ it("Operation buttons are working correctly", () => {
   buttons.at(14).simulate("click");
   expect(appReducer).toHaveBeenLastCalledWith(state, calculateClick());
 
-  expect(appReducer).toHaveBeenCalledTimes(5);
+  buttons.at(15).simulate("click");
+  expect(appReducer).toHaveBeenLastCalledWith(state, resetClick());
+
+  expect(appReducer).toHaveBeenCalledTimes(6);
+});
+
+it("shows calculated values", () => {
+  appReducer.mockReturnValue({ resultForDisplay: "One million", input: "" });
+  const app = mount(<App />);
+  app.update();
+  expect(app).toMatchSnapshot();
+});
+
+it("shows error messages and block inputs", () => {
+  appReducer.mockReturnValue({ error: "Random" });
+  const app = mount(<App />);
+  app.update();
+  expect(app).toMatchSnapshot();
 });

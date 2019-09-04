@@ -4,7 +4,8 @@ import {
   subtractionClick,
   multiplicationClick,
   divisionClick,
-  calculateClick
+  calculateClick,
+  resetClick
 } from "./ActionCreators";
 
 it("numberClick action creator exports the correct format", () => {
@@ -29,4 +30,8 @@ it("divisionClick action creator exports the correct format", () => {
 
 it("calculateClick action creator exports the correct format", () => {
   expect(calculateClick()).toMatchSnapshot();
+});
+
+it("resetClick action creator exports the correct format", () => {
+  expect(resetClick()).toMatchSnapshot();
 });

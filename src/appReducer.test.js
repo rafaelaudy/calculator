@@ -8,7 +8,9 @@ import {
   calculateClick,
   MULTIPLICATION_CLICK,
   multiplicationClick,
-  divisionClick
+  divisionClick,
+  RESET_CLICK,
+  resetClick
 } from "./ActionCreators";
 import appReducer from "./appReducer";
 
@@ -106,6 +108,18 @@ describe(`${NUMBER_CLICK_TYPE}`, () => {
   it("concatenates the selected number correctly", () => {
     const newState = appReducer({ input: "1" }, numberClick("1"));
     expect(newState.input).toBe("11");
+  });
+});
+
+describe(`${RESET_CLICK}`, () => {
+  it("resets the state", () => {
+    const newState = appReducer(
+      { input: "10", resultForDisplay: "150", error: "random" },
+      resetClick()
+    );
+    expect(newState.input).toBe("");
+    expect(newState.resultForDisplay).toBe(undefined);
+    expect(newState.error).toBe(undefined);
   });
 });
 
