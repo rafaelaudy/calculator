@@ -15,3 +15,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 - Click multiple time in operation buttons
 - Round numbers to fit the box
+- Check css
+- Logo and app name

@@ -103,6 +103,11 @@ exports[`App is correctly loaded 1`] = `
       >
         9
       </button>
+      <img
+        alt="[=] Equal Experts"
+        className="app__logo"
+        src="https://www.equalexperts.com/wp-content/themes/equalexperts/assets/logo.svg"
+      />
     </div>
     <div
       className="app__operation-container"
@@ -253,6 +258,11 @@ exports[`shows calculated values 1`] = `
         >
           9
         </button>
+        <img
+          alt="[=] Equal Experts"
+          className="app__logo"
+          src="https://www.equalexperts.com/wp-content/themes/equalexperts/assets/logo.svg"
+        />
       </div>
       <div
         className="app__operation-container"
@@ -404,6 +414,11 @@ exports[`shows error messages and block inputs 1`] = `
         >
           9
         </button>
+        <img
+          alt="[=] Equal Experts"
+          className="app__logo"
+          src="https://www.equalexperts.com/wp-content/themes/equalexperts/assets/logo.svg"
+        />
       </div>
       <div
         className="app__operation-container"

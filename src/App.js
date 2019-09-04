@@ -52,7 +52,14 @@ function App() {
       </div>
 
       <div className="app__buttons-container">
-        <div className="app__number-container">{buttonNumbers}</div>
+        <div className="app__number-container">
+          {buttonNumbers}
+          <img
+            className="app__logo"
+            src="https://www.equalexperts.com/wp-content/themes/equalexperts/assets/logo.svg"
+            alt="[=] Equal Experts"
+          ></img>
+        </div>
         <div className="app__operation-container">
           <button
             className="app__button"
