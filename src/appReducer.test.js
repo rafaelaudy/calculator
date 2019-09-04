@@ -5,32 +5,49 @@ import {
   sumClick,
   SUBTRACTION_CLICK,
   subtractionClick,
-  calculateClick
+  calculateClick,
+  MULTIPLICATION_CLICK,
+  multiplicationClick
 } from "./ActionCreators";
 import appReducer from "./appReducer";
 
-describe("Calc operations used in conjuction", () => {
-  it("Always use the stored operation to do the calculation", () => {
-    let state = appReducer({ value: "0" }, numberClick("5"));
+describe("Can chain operations", () => {
+  it("can isolated operations", () => {
+    let state = appReducer({ input: "" }, numberClick("5"));
+    state = appReducer(state, sumClick());
+    state = appReducer(state, numberClick("5"));
+    state = appReducer(state, calculateClick());
+    expect(state.resultForDisplay).toBe("10");
+    state = appReducer(state, numberClick("1"));
+    state = appReducer(state, sumClick());
+    state = appReducer(state, numberClick("1"));
+    state = appReducer(state, calculateClick());
+    expect(state.resultForDisplay).toBe("2");
+  });
+
+  it("can chain multiple operations in sequence", () => {
+    let state = appReducer({ input: "" }, numberClick("5"));
     state = appReducer(state, sumClick());
     state = appReducer(state, numberClick("5"));
     state = appReducer(state, subtractionClick());
-    expect(state.temporaryValue).toBe("10");
-    state = appReducer(state, numberClick("5"));
+    expect(state.resultForDisplay).toBe("10");
+    state = appReducer(state, numberClick("2"));
     state = appReducer(state, sumClick());
-    expect(state.temporaryValue).toBe("5");
+    expect(state.resultForDisplay).toBe("8");
   });
 
-  it("Can continue operations after using the calculate function", () => {
-    let state = appReducer({ value: "0" }, numberClick("5"));
+  it("Can chain result calculations and operations in sequence", () => {
+    let state = appReducer({ input: "" }, numberClick("5"));
     state = appReducer(state, sumClick());
     state = appReducer(state, numberClick("5"));
-    state = appReducer(state, calculateClick());
-    expect(state.temporaryValue).toBe("10");
-    state = appReducer(state, numberClick("5"));
     state = appReducer(state, sumClick());
+    state = appReducer(state, numberClick("3"));
     state = appReducer(state, calculateClick());
-    expect(state.temporaryValue).toBe("15");
+    expect(state.resultForDisplay).toBe("13");
+    state = appReducer(state, subtractionClick());
+    state = appReducer(state, numberClick("3"));
+    state = appReducer(state, calculateClick());
+    expect(state.resultForDisplay).toBe("10");
   });
 });
 
@@ -38,27 +55,42 @@ describe("Exception scenarios", () => {
   it("should ignore inexting types", () => {
     const newState = appReducer(undefined, { type: "INEXISTING" });
     expect(newState).toEqual({
-      value: "0",
-      temporaryValue: undefined,
-      temporaryOperation: undefined
+      input: "",
+      memory: undefined,
+      memoryOperation: undefined
     });
+  });
+
+  it("Should ignore multiple result calculatios", () => {
+    let state = appReducer({ input: "" }, numberClick("5"));
+    state = appReducer(state, sumClick());
+    state = appReducer(state, numberClick("5"));
+    state = appReducer(state, calculateClick());
+    expect(state.resultForDisplay).toBe("10");
+    state = appReducer(state, calculateClick());
+    state = appReducer(state, calculateClick());
+    expect(state.resultForDisplay).toBe("10");
+    state = appReducer(state, subtractionClick());
+    state = appReducer(state, numberClick("3"));
+    state = appReducer(state, calculateClick());
+    expect(state.resultForDisplay).toBe("7");
   });
 });
 
 describe(`${NUMBER_CLICK_TYPE}`, () => {
   it("removes 0 on the start of the string when a number is added", () => {
-    const newState = appReducer({ value: "0" }, numberClick("1"));
-    expect(newState.value).toBe("1");
+    const newState = appReducer({ input: "" }, numberClick("1"));
+    expect(newState.input).toBe("1");
   });
 
   it("keeps only one 0 at the beggining of the string", () => {
-    const newState = appReducer({ value: "0" }, numberClick("0"));
-    expect(newState.value).toBe("0");
+    const newState = appReducer({ input: "" }, numberClick("0"));
+    expect(newState.input).toBe("0");
   });
 
   it("concatenates the selected number correctly", () => {
-    const newState = appReducer({ value: "1" }, numberClick("1"));
-    expect(newState.value).toBe("11");
+    const newState = appReducer({ input: "1" }, numberClick("1"));
+    expect(newState.input).toBe("11");
   });
 });
 
@@ -74,32 +106,38 @@ describe(`${NUMBER_CLICK_TYPE}`, () => {
     method: subtractionClick,
     operation: "-",
     result: "-1"
+  },
+  {
+    type: MULTIPLICATION_CLICK,
+    method: multiplicationClick,
+    operation: "*",
+    result: "6"
   }
 ].map(scenario => {
   describe(scenario.type, () => {
-    it("clears current value and store as temporary", () => {
-      const newState = appReducer({ value: "5" }, scenario.method());
-      expect(newState.value).toBe("0");
-      expect(newState.temporaryValue).toBe("5");
+    it("clears current input and store as temporary", () => {
+      const newState = appReducer({ input: "5" }, scenario.method());
+      expect(newState.input).toBe("");
+      expect(newState.memory).toBe("5");
     });
 
     it("stores operation as +", () => {
       const newState = appReducer({}, scenario.method());
-      expect(newState.temporaryOperation).toBe(scenario.operation);
+      expect(newState.memoryOperation).toBe(scenario.operation);
     });
 
-    it(`calculates ${scenario.operation} in case a temporary value and operation are present`, () => {
+    it(`calculates ${scenario.operation} in case a temporary input and operation are present`, () => {
       const newState = appReducer(
         {
-          value: "3",
-          temporaryValue: "2",
-          temporaryOperation: scenario.operation
+          input: "3",
+          memory: "2",
+          memoryOperation: scenario.operation
         },
         scenario.method()
       );
-      expect(newState.temporaryValue).toBe(scenario.result);
-      expect(newState.temporaryOperation).toBe(scenario.operation);
-      expect(newState.value).toBe("0");
+      expect(newState.memory).toBe(scenario.result);
+      expect(newState.memoryOperation).toBe(scenario.operation);
+      expect(newState.input).toBe("");
     });
   });
 });

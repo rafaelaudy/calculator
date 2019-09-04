@@ -4,61 +4,70 @@ import {
   NUMBER_CLICK_TYPE,
   SUM_CLICK_TYPE,
   SUBTRACTION_CLICK,
-  CALCULATE_CLICK
+  CALCULATE_CLICK,
+  MULTIPLICATION_CLICK,
+  DIVISION_CLICK
 } from "./ActionCreators";
 
-const calculate = (
-  { temporaryOperation, temporaryValue, value },
-  currentOperation
-) => {
-  if (temporaryOperation === "=") {
-    temporaryOperation = currentOperation;
-  }
-
-  return temporaryOperation
-    ? eval(temporaryValue + temporaryOperation + value) + ""
-    : value;
+const calculate = ({ memoryOperation, memory, input }) => {
+  return input && memoryOperation
+    ? eval(memory + memoryOperation + input) + ""
+    : input;
 };
 
+const reduceOperation = (state, operation) => ({
+  ...state,
+  memory: state.memoryOperation
+    ? calculate(state)
+    : state.input || state.memory,
+  memoryOperation: operation,
+  input: "",
+  resultForDisplay: calculate(state)
+});
+
 const defaultState = {
-  value: "0",
-  temporaryValue: undefined,
-  temporaryOperation: undefined
+  input: "",
+  resultForDisplay: undefined,
+  memory: undefined,
+  memoryOperation: undefined
 };
 
 const appReducer = (state = defaultState, { type, payload }) => {
   switch (type) {
     case NUMBER_CLICK_TYPE: {
-      const value =
-        state.value === "0" ? payload.value : state.value + payload.value;
-      return { ...state, value };
+      const input =
+        state.input === "" ? payload.input : state.input + payload.input;
+      return { ...state, input };
     }
 
     case CALCULATE_CLICK: {
+      if (!state.memoryOperation) return { ...state };
+
       return {
         ...state,
-        temporaryValue: calculate(state),
-        temporaryOperation: "=",
-        value: "0"
+        memory: state.memoryOperation
+          ? calculate(state)
+          : state.input || state.memory,
+        memoryOperation: undefined,
+        input: "",
+        resultForDisplay: state.memoryOperation ? calculate(state) : state.input
       };
     }
 
     case SUM_CLICK_TYPE: {
-      return {
-        ...state,
-        temporaryValue: calculate(state, "+"),
-        temporaryOperation: "+",
-        value: "0"
-      };
+      return reduceOperation(state, "+");
     }
 
     case SUBTRACTION_CLICK: {
-      return {
-        ...state,
-        temporaryValue: calculate(state, "-"),
-        temporaryOperation: "-",
-        value: "0"
-      };
+      return reduceOperation(state, "-");
+    }
+
+    case MULTIPLICATION_CLICK: {
+      return reduceOperation(state, "*");
+    }
+
+    case DIVISION_CLICK: {
+      return reduceOperation(state, "/");
     }
 
     default: {

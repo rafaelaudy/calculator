@@ -11,7 +11,7 @@ import {
   calculateClick
 } from "./ActionCreators";
 
-jest.mock("./appReducer", () => jest.fn().mockReturnValue({ value: "0" }));
+jest.mock("./appReducer", () => jest.fn().mockReturnValue({ input: "0" }));
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -29,7 +29,7 @@ it("App is correctly loaded", () => {
 it("Numbers buttons are working correctly", () => {
   const app = shallow(<App />);
   const buttons = app.find("button");
-  const state = { value: "0" };
+  const state = { input: "" };
 
   [...Array(10).keys()].map(index => {
     buttons.at(index).simulate("click");
@@ -43,7 +43,7 @@ it("Numbers buttons are working correctly", () => {
 it("Operation buttons are working correctly", () => {
   const app = shallow(<App />);
   const buttons = app.find("button");
-  const state = { value: "0" };
+  const state = { input: "" };
 
   buttons.at(10).simulate("click");
   expect(appReducer).toHaveBeenLastCalledWith(state, sumClick());

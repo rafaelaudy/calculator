@@ -21,7 +21,7 @@ Object {
 exports[`numberClick action creator exports the correct format 1`] = `
 Object {
   "payload": Object {
-    "value": "1",
+    "input": "1",
   },
   "type": "NUMBER_CLICK",
 }

@@ -10,7 +10,7 @@ import {
 import appReducer from "./appReducer";
 
 function App() {
-  const [state, setState] = useState({ value: "0" });
+  const [state, setState] = useState({ input: "" });
 
   const reduceAndUpdateState = (actionCreator, payload) => {
     const newState = appReducer(state, actionCreator(payload));
@@ -26,14 +26,14 @@ function App() {
     </button>
   ));
 
-  const value =
-    state.value === "0" && state.temporaryValue
-      ? state.temporaryValue
-      : state.value;
+  const input =
+    state.input === "" && state.resultForDisplay
+      ? state.resultForDisplay
+      : state.input;
 
   return (
     <div>
-      <label>{value}</label>
+      <label>{input}</label>
       {buttonNumbers}
       <button onClick={() => reduceAndUpdateState(sumClick)}>+</button>
       <button onClick={() => reduceAndUpdateState(subtractionClick)}>-</button>

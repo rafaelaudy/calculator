@@ -2,9 +2,7 @@
 
 exports[`App is correctly loaded 1`] = `
 <div>
-  <label>
-    0
-  </label>
+  <label />
   <button
     key="button-number-0"
     onClick={[Function]}
