@@ -9,21 +9,27 @@ import {
   DIVISION_CLICK
 } from "./ActionCreators";
 
-const calculate = ({ memoryOperation, memory, input }) => {
-  return input && memoryOperation
+const calculate = ({ memoryOperation, memory, input }) =>
+  input && memoryOperation
     ? eval(memory + memoryOperation + input) + ""
     : input;
-};
 
-const reduceOperation = (state, operation) => ({
-  ...state,
-  memory: state.memoryOperation
-    ? calculate(state)
-    : state.input || state.memory,
-  memoryOperation: operation,
-  input: "",
-  resultForDisplay: calculate(state)
-});
+const reduceOperation = (state, operation) => {
+  const result = calculate(state);
+
+  if (result === "Infinity") {
+    return { ...defaultState, error: "Not a number" };
+  }
+
+  return {
+    ...state,
+    memory: state.memoryOperation ? result : state.input || state.memory,
+    memoryOperation: operation,
+    input: "",
+    resultForDisplay: result,
+    error: undefined
+  };
+};
 
 const defaultState = {
   input: "",
@@ -37,20 +43,24 @@ const appReducer = (state = defaultState, { type, payload }) => {
     case NUMBER_CLICK_TYPE: {
       const input =
         state.input === "" ? payload.input : state.input + payload.input;
-      return { ...state, input };
+      return { ...state, input, error: undefined };
     }
 
     case CALCULATE_CLICK: {
       if (!state.memoryOperation) return { ...state };
 
+      const result = calculate(state);
+      if (result === "Infinity") {
+        return { ...defaultState, error: "Not a number" };
+      }
+
       return {
         ...state,
-        memory: state.memoryOperation
-          ? calculate(state)
-          : state.input || state.memory,
+        memory: result,
         memoryOperation: undefined,
         input: "",
-        resultForDisplay: state.memoryOperation ? calculate(state) : state.input
+        resultForDisplay: result,
+        error: undefined
       };
     }
 
@@ -71,7 +81,7 @@ const appReducer = (state = defaultState, { type, payload }) => {
     }
 
     default: {
-      return { ...state };
+      return { ...state, error: undefined };
     }
   }
 };

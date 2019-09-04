@@ -7,7 +7,8 @@ import {
   subtractionClick,
   calculateClick,
   MULTIPLICATION_CLICK,
-  multiplicationClick
+  multiplicationClick,
+  divisionClick
 } from "./ActionCreators";
 import appReducer from "./appReducer";
 
@@ -52,6 +53,20 @@ describe("Can chain operations", () => {
 });
 
 describe("Exception scenarios", () => {
+  it("Should show not a number string when divided by 0", () => {
+    let state = appReducer({ input: "" }, numberClick("5"));
+    state = appReducer(state, divisionClick());
+    state = appReducer(state, numberClick("0"));
+    state = appReducer(state, calculateClick());
+    expect(state.error).toBe("Not a number");
+
+    state = appReducer({ input: "" }, numberClick("5"));
+    state = appReducer(state, divisionClick());
+    state = appReducer(state, numberClick("0"));
+    state = appReducer(state, divisionClick());
+    expect(state.error).toBe("Not a number");
+  });
+
   it("should ignore inexting types", () => {
     const newState = appReducer(undefined, { type: "INEXISTING" });
     expect(newState).toEqual({
