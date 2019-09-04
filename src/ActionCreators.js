@@ -23,3 +23,8 @@ export const DIVISION_CLICK = "DIVISION_CLICK";
 export const divisionClick = () => ({
   type: DIVISION_CLICK
 });
+
+export const CALCULATE_CLICK = "CALCULATE_CLICK";
+export const calculateClick = () => ({
+  type: CALCULATE_CLICK
+});

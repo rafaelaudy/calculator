@@ -3,7 +3,8 @@ import {
   sumClick,
   subtractionClick,
   multiplicationClick,
-  divisionClick
+  divisionClick,
+  calculateClick
 } from "./ActionCreators";
 
 it("numberClick action creator exports the correct format", () => {
@@ -24,4 +25,8 @@ it("multiplicationClick action creator exports the correct format", () => {
 
 it("divisionClick action creator exports the correct format", () => {
   expect(divisionClick()).toMatchSnapshot();
+});
+
+it("calculateClick action creator exports the correct format", () => {
+  expect(calculateClick()).toMatchSnapshot();
 });
