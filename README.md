@@ -1,8 +1,8 @@
-Creating a web calculator.
+Web calculator for Equal Experts test.
 
-![Alt text](/calculator.png?raw=true)
+## Available Scripts:
 
-## Available Scripts
+Please run `npm i` before any of the following commands:
 
 ### `npm start`
 
@@ -13,7 +13,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### `npm run build`
 
-### Next steps:
+## Possible Next steps:
 
 - Remove eval for security reasons
 - Add keyboard support
+
+## Screenshot:
+
+![Alt text](/calculator.png?raw=true)
