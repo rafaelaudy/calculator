@@ -1,5 +1,7 @@
 Creating a web calculator.
 
+![Alt text](/calculator.png?raw=true)
+
 ## Available Scripts
 
 ### `npm start`
