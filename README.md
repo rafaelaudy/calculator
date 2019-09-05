@@ -15,6 +15,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### Next steps:
 
-- Add ability to click multiple time in operation buttons (+ + +)
-- Add shadow when buttons are disabled
 - Remove eval for security reasons

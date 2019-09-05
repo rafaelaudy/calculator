@@ -11,43 +11,51 @@ import {
 } from "./ActionCreators";
 
 const calculate = ({ memoryOperation, memory, input }) => {
+  let result;
+
   if (input && memoryOperation) {
-    const result = eval(memory + memoryOperation + input);
-    return Math.round(result * 100) / 100 + "";
+    const temporaryResult = eval(memory + memoryOperation + input);
+    result = Math.round(temporaryResult * 100) / 100 + "";
   } else {
-    return input;
+    result = input;
   }
+
+  if (result === "Infinity") {
+    return { error: "Not a number" };
+  }
+
+  if (memoryOperation && result === "") {
+    return { error: "Bad calc" };
+  }
+
+  if (!insideCalculatorLimits(result, memoryOperation)) {
+    return { error: "Out of limits" };
+  }
+
+  return { result: result };
 };
 
-const checkCalculatorLimits = (result = "0", memoryOperation) => {
+const insideCalculatorLimits = (result = "0", memoryOperation) => {
   const resultAfterLimits = Math.min(
     Math.max(parseFloat(result), -999999999),
     999999999
   );
-  if (memoryOperation && Number(resultAfterLimits) !== Number(result)) {
-    return { ...defaultState, error: "Out of limits" };
-  }
+  return memoryOperation && Number(resultAfterLimits) !== Number(result)
+    ? false
+    : true;
 };
 
 const reduceOperation = (state, operation) => {
-  const result = calculate(state);
+  const { result, error } = calculate(state);
 
-  if (result === "Infinity") {
-    return { ...defaultState, error: "Not a number" };
-  }
-
-  const error = checkCalculatorLimits(result, state.memoryOperation);
-
-  return error
-    ? error
-    : {
-        ...state,
-        memory: state.memoryOperation ? result : state.input || state.memory,
-        memoryOperation: operation,
-        input: "",
-        resultForDisplay: result,
-        error: undefined
-      };
+  return {
+    ...state,
+    memory: state.memoryOperation ? result : state.input || state.memory,
+    memoryOperation: operation,
+    input: "",
+    resultForDisplay: result,
+    error
+  };
 };
 
 const defaultState = {
@@ -68,23 +76,16 @@ const appReducer = (state = defaultState, { type, payload } = {}) => {
     case CALCULATE_CLICK: {
       if (!state.memoryOperation) return { ...state };
 
-      const result = calculate(state);
-      if (result === "Infinity") {
-        return { ...defaultState, error: "Not a number" };
-      }
+      const { result, error } = calculate(state);
 
-      const error = checkCalculatorLimits(result, state.memoryOperation);
-
-      return error
-        ? error
-        : {
-            ...state,
-            memory: result,
-            memoryOperation: undefined,
-            input: "",
-            resultForDisplay: result,
-            error: undefined
-          };
+      return {
+        ...state,
+        memory: result,
+        memoryOperation: undefined,
+        input: "",
+        resultForDisplay: result,
+        error: error
+      };
     }
 
     case SUM_CLICK_TYPE: {

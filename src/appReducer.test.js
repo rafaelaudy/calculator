@@ -15,7 +15,7 @@ import {
 import appReducer from "./appReducer";
 
 describe("Can chain operations", () => {
-  it("can isolated operations", () => {
+  it("can chain isolated operations", () => {
     let state = appReducer({ input: "" }, numberClick("5"));
     state = appReducer(state, sumClick());
     state = appReducer(state, numberClick("5"));
@@ -51,6 +51,7 @@ describe("Can chain operations", () => {
     state = appReducer(state, numberClick("3"));
     state = appReducer(state, calculateClick());
     expect(state.resultForDisplay).toBe("10");
+    expect(state.error).toBe(undefined);
   });
 });
 
@@ -75,6 +76,15 @@ describe("Exception scenarios", () => {
     state = appReducer(state, numberClick("3"));
     state = appReducer(state, calculateClick());
     expect(state.resultForDisplay).toBe("1.67");
+  });
+
+  it("Should not allow multiple operations in sequence", () => {
+    let state = appReducer({ input: "" }, numberClick("5"));
+    state = appReducer(state, divisionClick());
+    state = appReducer(state, numberClick("3"));
+    state = appReducer(state, divisionClick());
+    state = appReducer(state, divisionClick());
+    expect(state.error).toBe("Bad calc");
   });
 
   it("Should show not a number string when divided by 0", () => {
