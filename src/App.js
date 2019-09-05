@@ -52,7 +52,11 @@ function App() {
       </div>
 
       <div className="app__buttons-container">
-        <div className="app__number-container">
+        <div
+          className={`app__number-container ${
+            state.error ? "app__number-container--disabled" : ""
+          }`}
+        >
           {buttonNumbers}
           <img
             className="app__logo"

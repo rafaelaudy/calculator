@@ -45,6 +45,10 @@ body,
   background-color: var(--main-blue);
 }
 
+.app__number-container--disabled {
+  filter: grayscale(100%);
+}
+
 .app__operation-container {
   width: 20px;
 }
@@ -73,6 +77,10 @@ body,
 
 .app__button:hover {
   background-color: var(--alt-blue);
+}
+
+.app__button:disabled {
+  filter: grayscale(80%);
 }
 
 .app__operation-container .app__button,
