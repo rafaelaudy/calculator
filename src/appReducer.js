@@ -10,10 +10,24 @@ import {
   RESET_CLICK
 } from "./ActionCreators";
 
-const calculate = ({ memoryOperation, memory, input }) =>
-  input && memoryOperation
-    ? eval(memory + memoryOperation + input) + ""
-    : input;
+const calculate = ({ memoryOperation, memory, input }) => {
+  if (input && memoryOperation) {
+    const result = eval(memory + memoryOperation + input);
+    return Math.round(result * 100) / 100 + "";
+  } else {
+    return input;
+  }
+};
+
+const checkCalculatorLimits = (result = "0", memoryOperation) => {
+  const resultAfterLimits = Math.min(
+    Math.max(parseFloat(result), -999999999),
+    999999999
+  );
+  if (memoryOperation && Number(resultAfterLimits) !== Number(result)) {
+    return { ...defaultState, error: "Out of limits" };
+  }
+};
 
 const reduceOperation = (state, operation) => {
   const result = calculate(state);
@@ -22,14 +36,18 @@ const reduceOperation = (state, operation) => {
     return { ...defaultState, error: "Not a number" };
   }
 
-  return {
-    ...state,
-    memory: state.memoryOperation ? result : state.input || state.memory,
-    memoryOperation: operation,
-    input: "",
-    resultForDisplay: result,
-    error: undefined
-  };
+  const error = checkCalculatorLimits(result, state.memoryOperation);
+
+  return error
+    ? error
+    : {
+        ...state,
+        memory: state.memoryOperation ? result : state.input || state.memory,
+        memoryOperation: operation,
+        input: "",
+        resultForDisplay: result,
+        error: undefined
+      };
 };
 
 const defaultState = {
@@ -55,14 +73,18 @@ const appReducer = (state = defaultState, { type, payload } = {}) => {
         return { ...defaultState, error: "Not a number" };
       }
 
-      return {
-        ...state,
-        memory: result,
-        memoryOperation: undefined,
-        input: "",
-        resultForDisplay: result,
-        error: undefined
-      };
+      const error = checkCalculatorLimits(result, state.memoryOperation);
+
+      return error
+        ? error
+        : {
+            ...state,
+            memory: result,
+            memoryOperation: undefined,
+            input: "",
+            resultForDisplay: result,
+            error: undefined
+          };
     }
 
     case SUM_CLICK_TYPE: {

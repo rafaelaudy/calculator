@@ -11,9 +11,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### `npm run build`
 
-### Bugs to work on:
+### Next steps:
 
-- Click multiple time in operation buttons
-- Round numbers to fit the box
-- Check css
-- Logo and app name
+- Add ability to click multiple time in operation buttons (+ + +)
+- Add shadow when buttons are disabled
+- Remove eval for security reasons

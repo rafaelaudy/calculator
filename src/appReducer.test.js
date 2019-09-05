@@ -55,6 +55,28 @@ describe("Can chain operations", () => {
 });
 
 describe("Exception scenarios", () => {
+  it("Should restrict the length of numbers calculated", () => {
+    let state = appReducer({ input: "" }, numberClick("999999999"));
+    state = appReducer(state, sumClick());
+    state = appReducer(state, numberClick("2"));
+    state = appReducer(state, calculateClick());
+    expect(state.error).toBe("Out of limits");
+
+    state = appReducer({ input: "" }, numberClick("999999999"));
+    state = appReducer(state, sumClick());
+    state = appReducer(state, numberClick("2"));
+    state = appReducer(state, sumClick());
+    expect(state.error).toBe("Out of limits");
+  });
+
+  it("Should only have a precision of two", () => {
+    let state = appReducer({ input: "" }, numberClick("5"));
+    state = appReducer(state, divisionClick());
+    state = appReducer(state, numberClick("3"));
+    state = appReducer(state, calculateClick());
+    expect(state.resultForDisplay).toBe("1.67");
+  });
+
   it("Should show not a number string when divided by 0", () => {
     let state = appReducer({ input: "" }, numberClick("5"));
     state = appReducer(state, divisionClick());
