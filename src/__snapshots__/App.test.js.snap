@@ -21,7 +21,7 @@ exports[`App is correctly loaded 1`] = `
     className="app__buttons-container"
   >
     <div
-      className="app__number-container"
+      className="app__number-container "
     >
       <button
         className="app__button"
@@ -176,7 +176,7 @@ exports[`shows calculated values 1`] = `
       className="app__buttons-container"
     >
       <div
-        className="app__number-container"
+        className="app__number-container "
       >
         <button
           className="app__button"
@@ -332,7 +332,7 @@ exports[`shows error messages and block inputs 1`] = `
       className="app__buttons-container"
     >
       <div
-        className="app__number-container"
+        className="app__number-container app__number-container--disabled"
       >
         <button
           className="app__button"
